@@ -1,0 +1,25 @@
+### CONTACTS INDEX
+GET http://localhost:3000/contacts.json
+
+### CONTACTS CREATE
+POST http://localhost:3000/contacts.json
+Content-Type: application/json
+
+{
+  "first_name": "Test first name",
+  "last_name": "Test last name"
+}
+
+### CONTACTS SHOW
+GET http://localhost:3000/contacts/1.json
+
+### CONTACTS UPDATE
+PATCH http://localhost:3000/contacts/4.json
+Content-Type: application/json
+
+{
+  "email": "test@test.com"
+}
+
+### CONTACTS DESTROY
+DELETE http://localhost:3000/contacts/4.json
