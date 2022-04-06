@@ -1,18 +1,33 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue'
+import axios from "axios"
 
 export default {
   name: 'HomeView',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      contacts: [],
+      contact: {},
+    }
+  },
+  created() {
+
+  },
+  methods: {
   }
 }
 </script>
+
+<style></style>
+
+
+    // t.string "first_name"
+    // t.string "last_name"
+    // t.string "email"
+    // t.string "phone_number"
+    // t.string "image"
