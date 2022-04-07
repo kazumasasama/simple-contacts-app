@@ -65,7 +65,6 @@
 
 <script>
 import axios from "axios"
-
 export default {
   name: 'HomeView',
   data() {
@@ -90,7 +89,7 @@ export default {
       // })
     },
     indexContacts() {
-      axios.get("http://localhost:3000/contacts.json")
+      axios.get("contacts.json")
         .then((res) => {
           this.contacts = res.data;
         })
@@ -99,21 +98,21 @@ export default {
         })
     },
     createContact(contact) {
-      axios.post("http://localhost:3000/contacts.json", contact)
+      axios.post("contacts.json", contact)
         .then((res) => {
           this.contacts.push(res.data);
           this.contact = {};
         })
     },
     updateContact(contact) {
-      axios.patch(`http://localhost:3000/contacts/${contact.id}.json`, contact)
+      axios.patch(`contacts/${contact.id}.json`, contact)
         .then(() => {
           this.contact = {};
           location.reload();
         })
     },
     destroyContact(contact) {
-      axios.delete(`http://localhost:3000/contacts/${contact.id}.json`)
+      axios.delete(`contacts/${contact.id}.json`)
         .then(() => {
           var i = this.contacts.indexOf(contact);
           this.contacts.splice(i, 1);
