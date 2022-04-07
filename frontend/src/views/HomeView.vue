@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <div v-for="error in errors" :key="error">
+      <p class="error-message">{{ error }}</p>
+    </div>
     <div>
       <h3>Create Contact</h3>
       <p>
@@ -71,6 +74,7 @@ export default {
     return {
       contacts: [],
       contact: {},
+      errors: [],
     }
   },
   created() {
@@ -78,15 +82,8 @@ export default {
   },
   methods: {
     showContact(contact) {
-      // axios.get(`http://localhost:3000/contacts/${contact.id}`)
-      // .then((res)=> {
-      //   this.contact = res.data;
       document.querySelector("#contact-dialog").showModal();
       this.contact = contact;
-      // })
-      //   .catch((error) => {
-      //   console.log(error);
-      // })
     },
     indexContacts() {
       axios.get("contacts.json")
@@ -94,7 +91,7 @@ export default {
           this.contacts = res.data;
         })
         .catch((error) => {
-          console.log(error);
+          this.errors = error.response.data.errors;
         })
     },
     createContact(contact) {
@@ -103,6 +100,9 @@ export default {
           this.contacts.push(res.data);
           this.contact = {};
         })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+        })
     },
     updateContact(contact) {
       axios.patch(`contacts/${contact.id}.json`, contact)
@@ -110,12 +110,18 @@ export default {
           this.contact = {};
           location.reload();
         })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+        })
     },
     destroyContact(contact) {
       axios.delete(`contacts/${contact.id}.json`)
         .then(() => {
           var i = this.contacts.indexOf(contact);
           this.contacts.splice(i, 1);
+        })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
         })
     }
   }
@@ -129,11 +135,7 @@ export default {
 .delete-btn {
   color: red;
 }
+.error-message {
+  color: red;
+}
 </style>
-
-
-    // t.string "first_name"
-    // t.string "last_name"
-    // t.string "email"
-    // t.string "phone_number"
-    // t.string "image"
